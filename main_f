@@ -1,0 +1,56 @@
+#include <stdio.h>
+
+void input(char *put, int size);
+
+int main() 
+{
+	char put[100];
+	int count[27] = {0};
+	char alp[27] = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z' };
+
+	printf("문자열을 입력하시요 : ");
+	input(put, sizeof(put));
+
+	printf("입력한 문자열 : %s\n", put);   // put에 입력된 문자 확인용
+
+	int i;
+	for (i = 0; i < 100; i++)
+	{
+		if (put[i] == '\0')
+		{
+			break;
+		}
+		if (put[i] >= 65 && put[i] <= 88)   //대문자를 소문자로 변환
+		{
+			put[i] = put[i] + 32;
+		}
+		if (put[i] >= 97 && put[i] <= 120)  //소문자 개수세기
+		{
+			count[put[i] - 97] = count[put[i] - 97] + 1;
+		}
+	}
+
+	for (i = 0; i < 27; i++) 
+	{
+		if (count[i] > 0) 
+		{
+			printf("%s : %d\n", alp[i], count[i]);
+		}
+	}
+	
+}
+
+void input(char *put, int size) 
+{
+	char ch;
+	int i = 0;
+
+	ch = getchar();
+	while ((ch != '\n') && (i < size - 1)) 
+	{
+		put[i] = ch;
+		i++;
+		ch = getchar();
+	}
+	put[i] = '\0';
+}
